@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>VMR Madhuram Mobile Care</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0B1D35;
+  --navy-mid: #162D4A;
+  --navy-light: #1E3A5F;
+  --gold: #F4A300;
+  --gold-light: #FFD166;
+  --cream: #F8F4EE;
+  --off-white: #F1EDE5;
+  --text: #1a1a2e;
+  --muted: #6B7280;
+  --green: #16A34A;
+  --red: #DC2626;
+  --blue: #2563EB;
+  --purple: #7C3AED;
+  --card-bg: #ffffff;
+  --border: rgba(11,29,53,0.08);
+  --shadow: 0 4px 24px rgba(11,29,53,0.10);
+  --shadow-sm: 0 2px 8px rgba(11,29,53,0.07);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--off-white);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--off-white); }
+::-webkit-scrollbar-thumb { background: var(--navy-light); border-radius: 99px; }
+
+/* ===== HEADER ===== */
+header {
+  background: var(--navy);
+  color: white;
+  padding: 0 28px;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 300;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+}
+
+.header-left { display: flex; align-items: center; gap: 14px; }
+
+.logo-mark {
+  width: 38px; height: 38px;
+  background: linear-gradient(135deg, var(--gold), #e69500);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--navy);
+  letter-spacing: -0.5px;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 3px rgba(244,163,0,0.2);
+}
+
+.brand-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  letter-spacing: -0.3px;
+}
+.brand-name span { color: var(--gold); }
+.brand-sub {
+  font-size: 10.5px;
+  color: rgba(255,255,255,0.5);
+  margin-top: 1px;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.header-right { display: flex; align-items: center; gap: 18px; }
+.header-date {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: rgba(255,255,255,0.55);
+  text-align: right;
+}
+.header-date strong { color: var(--gold); display: block; font-size: 13px; }
+
+.notif-btn {
+  width: 34px; height: 34px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+  transition: background 0.2s;
+}
+.notif-btn:hover { background: rgba(255,255,255,0.14); }
+.notif-dot {
+  position: absolute; top: 6px; right: 6px;
+  width: 7px; height: 7px;
+  background: var(--gold);
+  border-radius: 50%;
+  border: 1.5px solid var(--navy);
+}
+
+/* ===== LAYOUT ===== */
+.container { display: flex; min-height: calc(100vh - 60px); }
+
+/* ===== SIDEBAR ===== */
+nav {
+  width: 220px;
+  background: var(--navy-mid);
+  padding: 20px 0;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  position: sticky;
+  top: 60px;
+  height: calc(100vh - 60px);
+  overflow-y: auto;
+}
+
+.nav-section-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 14px 18px 6px;
+}
+
+nav a {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 10px 18px;
+  color: rgba(255,255,255,0.55);
+  text-decoration: none;
+  font-size: 13.5px;
+  font-weight: 500;
+  border-left: 3px solid transparent;
+  cursor: pointer;
+  transition: all 0.18s;
+  user-select: none;
+  border-radius: 0 8px 8px 0;
+  margin: 0 8px 0 0;
+}
+
+nav a:hover, nav a.active {
+  color: white;
+  background: rgba(244,163,0,0.12);
+  border-left-color: var(--gold);
+}
+
+nav a .ico {
+  font-size: 15px;
+  width: 22px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.nav-bottom {
+  margin-top: auto;
+  padding: 12px 10px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.nav-shop-card {
+  background: rgba(244,163,0,0.1);
+  border: 1px solid rgba(244,163,0,0.2);
+  border-radius: 10px;
+  padding: 12px;
+}
+.nav-shop-name { font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700; color: var(--gold); }
+.nav-shop-addr { font-size: 10px; color: rgba(255,255,255,0.4); margin-top: 3px; }
+
+/* ===== MAIN ===== */
+main { flex: 1; padding: 26px 28px; overflow: auto; }
+
+.page { display: none; animation: fadeIn 0.2s ease; }
+.page.active { display: block; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ===== PAGE HEADER ===== */
+.page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 22px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.page-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1;
+}
+.page-sub { font-size: 12.5px; color: var(--muted); margin-top: 4px; }
+.page-actions { display: flex; gap: 8px; }
+
+/* ===== KPI GRID ===== */
+.kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 22px; }
+.kpi-card {
+  background: var(--card-bg);
+  border-radius: 14px;
+  padding: 18px 20px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.kpi-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.kpi-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--blue);
+}
+.kpi-card.g::before { background: var(--green); }
+.kpi-card.r::before { background: var(--red); }
+.kpi-card.p::before { background: var(--purple); }
+.kpi-card.gold::before { background: var(--gold); }
+
+.kpi-icon {
+  width: 36px; height: 36px;
+  border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  margin-bottom: 12px;
+  background: rgba(37,99,235,0.08);
+}
+.kpi-card.g .kpi-icon { background: rgba(22,163,74,0.08); }
+.kpi-card.r .kpi-icon { background: rgba(220,38,38,0.08); }
+.kpi-card.p .kpi-icon { background: rgba(124,58,237,0.08); }
+.kpi-card.gold .kpi-icon { background: rgba(244,163,0,0.1); }
+
+.kpi-label {
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+.kpi-val {
+  font-family: 'Syne', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  margin: 6px 0 5px;
+  color: var(--navy);
+  line-height: 1;
+}
+.kpi-trend { font-size: 11.5px; color: var(--green); font-weight: 500; }
+.kpi-trend.dn { color: var(--red); }
+.kpi-trend.nu { color: var(--muted); }
+
+/* ===== CARDS ===== */
+.card {
+  background: var(--card-bg);
+  border-radius: 14px;
+  padding: 20px 22px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+  margin-bottom: 16px;
+}
+.card-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* ===== BADGES ===== */
+.badge {
+  font-size: 10.5px;
+  font-family: 'Space Mono', monospace;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-weight: 700;
+}
+.badge-blue { background: #EFF6FF; color: #2563EB; }
+.badge-red { background: #FEF2F2; color: #DC2626; }
+.badge-green { background: #F0FDF4; color: #16A34A; }
+.badge-purple { background: #F5F3FF; color: #7C3AED; }
+.badge-gold { background: #FFFBEB; color: #92400E; }
+
+/* ===== GRIDS ===== */
+.two-col { display: grid; grid-template-columns: 1.5fr 1fr; gap: 16px; margin-bottom: 16px; }
+.two-col-eq { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+
+/* ===== SUM ROW ===== */
+.sum-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 20px; }
+.sum-box {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 16px 18px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+  text-align: center;
+}
+.sum-val {
+  font-family: 'Syne', sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+.sum-lbl { font-size: 11px; color: var(--muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* ===== BAR CHART ===== */
+.bar-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  height: 130px;
+  padding: 0 4px;
+}
+.bar-group { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; }
+.bar-stack { display: flex; flex-direction: column; align-items: center; width: 100%; }
+.bar { width: 100%; border-radius: 4px 4px 0 0; min-height: 3px; transition: opacity 0.2s; }
+.bar:hover { opacity: 0.8; }
+.bar.mid { border-radius: 0; }
+.bar.bot { border-radius: 0 0 4px 4px; }
+.bar-lbl { font-size: 10px; color: var(--muted); margin-top: 6px; font-family: 'Space Mono', monospace; }
+.legend { display: flex; gap: 14px; margin-top: 12px; flex-wrap: wrap; }
+.leg-item { display: flex; align-items: center; gap: 6px; font-size: 11.5px; color: var(--muted); }
+.leg-dot { width: 10px; height: 10px; border-radius: 3px; }
+
+/* ===== DONUT ===== */
+.donut-wrap { display: flex; align-items: center; gap: 20px; }
+.donut {
+  width: 110px; height: 110px;
+  border-radius: 50%;
+  background: conic-gradient(#2563EB 0deg 180deg, #16A34A 180deg 252deg, #F4A300 252deg 306deg, #7C3AED 306deg 360deg);
+  position: relative;
+  flex-shrink: 0;
+}
+.donut::after {
+  content: '₹1.24L';
+  position: absolute;
+  width: 72px; height: 72px;
+  background: white;
+  border-radius: 50%;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 800;
+  color: var(--navy);
+  font-family: 'Space Mono', monospace;
+}
+.donut-leg { font-size: 12px; }
+.d-item { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.d-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+.d-name { color: var(--muted); flex: 1; font-size: 12px; }
+.d-pct { font-weight: 700; color: var(--navy); font-family: 'Space Mono', monospace; font-size: 12px; }
+
+/* ===== JOB LIST ===== */
+.job-list { display: flex; flex-direction: column; gap: 9px; }
+.job-item {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 11px 13px;
+  border-radius: 10px;
+  background: var(--cream);
+  border: 1px solid rgba(11,29,53,0.06);
+  transition: background 0.15s;
+}
+.job-item:hover { background: var(--off-white); }
+.j-avatar {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--navy);
+  color: white;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-size: 12px; font-weight: 800;
+  flex-shrink: 0;
+}
+.j-info { flex: 1; min-width: 0; }
+.j-name { font-size: 13px; font-weight: 600; color: var(--navy); }
+.j-dev { font-size: 11px; color: var(--muted); }
+.s-badge {
+  font-size: 10px; font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 99px;
+  flex-shrink: 0;
+  font-family: 'Space Mono', monospace;
+}
+.s-recv { background: #FEF3C7; color: #92400E; }
+.s-prog { background: #DBEAFE; color: #1E40AF; }
+.s-ready { background: #D1FAE5; color: #065F46; }
+.s-done { background: #F1F5F9; color: #475569; }
+
+/* ===== ALERTS ===== */
+.alert-list { display: flex; flex-direction: column; gap: 8px; }
+.alert-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border-left: 4px solid var(--red);
+  background: #FEF2F2;
+}
+.alert-item.warn { border-left-color: #D97706; background: #FFFBEB; }
+.a-name { font-size: 12.5px; font-weight: 600; }
+.a-qty { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.a-badge {
+  font-size: 10px; font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 99px;
+  background: var(--red);
+  color: white;
+  font-family: 'Space Mono', monospace;
+  flex-shrink: 0;
+}
+.a-badge.warn { background: #D97706; }
+
+/* ===== JIO GRID ===== */
+.jio-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.jio-card {
+  background: #F5F3FF;
+  border: 1px solid #DDD6FE;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+}
+.jio-lbl { font-size: 11px; color: var(--purple); font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; }
+.jio-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 36px;
+  font-weight: 800;
+  color: #5B21B6;
+  margin: 8px 0 4px;
+}
+.jio-comm { font-size: 12px; color: var(--muted); }
+
+/* ===== TABLE ===== */
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+thead tr { background: var(--cream); }
+th {
+  padding: 10px 14px;
+  text-align: left;
+  font-weight: 700;
+  color: var(--navy);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  font-family: 'Space Mono', monospace;
+}
+td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--off-white);
+  color: var(--text);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: var(--cream); }
+.amt { font-family: 'Space Mono', monospace; font-weight: 700; color: var(--navy); font-size: 12.5px; }
+.pay-c { font-size: 10px; padding: 3px 9px; border-radius: 99px; font-weight: 700; background: #ECFDF5; color: #065F46; font-family: 'Space Mono', monospace; }
+.pay-u { font-size: 10px; padding: 3px 9px; border-radius: 99px; font-weight: 700; background: #EFF6FF; color: #1E40AF; font-family: 'Space Mono', monospace; }
+
+/* ===== FORMS ===== */
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.form-group { display: flex; flex-direction: column; gap: 5px; }
+.form-group label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--navy);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.form-group input, .form-group select, .form-group textarea {
+  padding: 10px 13px;
+  border: 1.5px solid rgba(11,29,53,0.12);
+  border-radius: 9px;
+  font-size: 13px;
+  color: var(--text);
+  outline: none;
+  transition: border 0.2s, box-shadow 0.2s;
+  background: white;
+  font-family: 'DM Sans', sans-serif;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.08);
+}
+.form-group textarea { resize: vertical; min-height: 72px; }
+
+/* ===== BUTTONS ===== */
+.btn {
+  padding: 10px 20px;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+  font-family: 'DM Sans', sans-serif;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn:hover { opacity: 0.88; transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+.btn-primary { background: var(--navy); color: white; }
+.btn-gold { background: var(--gold); color: var(--navy); }
+.btn-red { background: var(--red); color: white; }
+.btn-green { background: var(--green); color: white; }
+.btn-sm { padding: 6px 13px; font-size: 11px; border-radius: 7px; }
+.btn-row { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+
+/* ===== PILL STATUS ===== */
+.pill {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-family: 'Space Mono', monospace;
+}
+.pill-ok { background: #D1FAE5; color: #065F46; }
+.pill-out { background: #FEF2F2; color: #DC2626; }
+.pill-low { background: #FFFBEB; color: #D97706; }
+.pill-reg { background: #EFF6FF; color: #1E40AF; }
+.pill-rep { background: #F3E8FF; color: #6D28D9; }
+
+/* ===== KANBAN ===== */
+.kanban { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+.k-col {
+  background: var(--cream);
+  border-radius: 12px;
+  padding: 14px 12px;
+  border: 1px solid var(--border);
+}
+.k-head {
+  font-size: 11px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  font-family: 'Space Mono', monospace;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.k-head.recv { color: #92400E; }
+.k-head.prog { color: #1E40AF; }
+.k-head.ready { color: #065F46; }
+.k-head.done { color: #475569; }
+
+.k-card {
+  background: white;
+  border-radius: 9px;
+  padding: 11px 13px;
+  margin-bottom: 9px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.15s;
+}
+.k-card:hover { transform: translateY(-1px); }
+.k-card-name { font-size: 12.5px; font-weight: 700; color: var(--navy); }
+.k-card-dev { font-size: 11px; color: var(--muted); margin: 2px 0; }
+.k-card-date { font-size: 10px; color: #94A3B8; font-family: 'Space Mono', monospace; }
+.k-card-cost { font-size: 12px; font-weight: 700; color: var(--navy); margin-top: 6px; font-family: 'Space Mono', monospace; }
+
+/* ===== REP BARS ===== */
+.rep-bar-wrap { margin-bottom: 13px; }
+.rep-bar-label { display: flex; justify-content: space-between; font-size: 12.5px; color: var(--text); margin-bottom: 5px; font-weight: 500; }
+.rep-bar-track { background: var(--off-white); border-radius: 99px; height: 8px; overflow: hidden; }
+.rep-bar-fill { height: 8px; border-radius: 99px; transition: width 0.6s ease; }
+
+/* ===== CART BOX ===== */
+.cart-box {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 14px;
+}
+.cart-head {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 10px;
+  font-family: 'Space Mono', monospace;
+}
+.cart-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(11,29,53,0.06);
+  font-size: 13px;
+}
+.cart-row:last-of-type { border-bottom: none; }
+.cart-item-name { font-weight: 600; color: var(--navy); }
+.cart-item-sub { font-size: 11px; color: var(--muted); }
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 2px solid rgba(11,29,53,0.1);
+  margin-top: 8px;
+  padding-top: 10px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+/* ===== COLLECT BOX ===== */
+.today-collect {
+  background: linear-gradient(135deg, #ECFDF5, #D1FAE5);
+  border-radius: 10px;
+  padding: 14px;
+  text-align: center;
+  margin-top: 14px;
+  border: 1px solid #A7F3D0;
+}
+.today-collect-lbl { font-size: 10px; color: var(--green); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; font-family: 'Space Mono', monospace; }
+.today-collect-amt { font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800; color: #065F46; margin: 6px 0 3px; }
+.today-collect-sub { font-size: 11px; color: var(--muted); }
+
+/* ===== SEARCH BAR ===== */
+.search-bar { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+.search-bar input {
+  flex: 1; min-width: 160px;
+  padding: 10px 14px;
+  border: 1.5px solid rgba(11,29,53,0.12);
+  border-radius: 9px;
+  font-size: 13px;
+  outline: none;
+  background: white;
+  transition: border 0.2s;
+  font-family: 'DM Sans', sans-serif;
+}
+.search-bar input:focus { border-color: var(--blue); }
+.search-bar select {
+  padding: 10px 13px;
+  border: 1.5px solid rgba(11,29,53,0.12);
+  border-radius: 9px;
+  font-size: 13px;
+  outline: none;
+  background: white;
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* ===== SETTINGS ===== */
+.setting-section { margin-bottom: 28px; }
+.setting-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.toggle-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--off-white);
+}
+.toggle-info { font-size: 13px; font-weight: 600; color: var(--navy); }
+.toggle-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.toggle {
+  width: 44px; height: 24px;
+  background: #CBD5E1;
+  border-radius: 99px;
+  position: relative;
+  cursor: pointer;
+  border: none;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+.toggle.on { background: var(--green); }
+.toggle::after {
+  content: '';
+  position: absolute;
+  width: 18px; height: 18px;
+  background: white;
+  border-radius: 50%;
+  top: 3px; left: 3px;
+  transition: left 0.2s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+}
+.toggle.on::after { left: 23px; }
+
+.user-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  margin-bottom: 8px;
+}
+.u-name { font-size: 13px; font-weight: 700; color: var(--navy); }
+.u-role { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.role-chip {
+  font-size: 9px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-family: 'Space Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.role-owner { background: #FEF3C7; color: #92400E; }
+.role-staff { background: #DBEAFE; color: #1E40AF; }
+.role-tech { background: #D1FAE5; color: #065F46; }
+
+/* ===== DIVIDER ===== */
+.divider { height: 1px; background: var(--border); margin: 20px 0; }
+
+/* ===== MOBILE ===== */
+@media (max-width: 900px) {
+  .kpi-grid { grid-template-columns: 1fr 1fr; }
+  .two-col, .two-col-eq, .kanban, .sum-row { grid-template-columns: 1fr; }
+  .form-grid { grid-template-columns: 1fr; }
+  nav { display: none; }
+  main { padding: 16px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <div class="logo-mark">VMR</div>
+    <div>
+      <div class="brand-name"><span>VMR</span> Madhuram Mobile Care</div>
+      <div class="brand-sub">📍 Bus Stop, Thoravalur – 638 103 &nbsp;·&nbsp; 📞 97915 58255</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <button class="notif-btn">🔔<div class="notif-dot"></div></button>
+    <div class="header-date">
+      <strong>05 May 2026</strong>
+      Tuesday · 06:13 PM IST
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+<nav>
+  <div class="nav-section-label">Main</div>
+  <a class="active" onclick="show('dashboard',this)"><span class="ico">🏠</span> Dashboard</a>
+  <a onclick="show('inventory',this)"><span class="ico">📦</span> Inventory</a>
+  <a onclick="show('sales',this)"><span class="ico">🧾</span> Sales</a>
+  <a onclick="show('repairs',this)"><span class="ico">🔧</span> Repairs</a>
+  <div class="nav-section-label">Customers</div>
+  <a onclick="show('customers',this)"><span class="ico">👤</span> Customers</a>
+  <a onclick="show('jio',this)"><span class="ico">📡</span> Jio Services</a>
+  <div class="nav-section-label">Business</div>
+  <a onclick="show('reports',this)"><span class="ico">📊</span> Reports</a>
+  <a onclick="show('settings',this)"><span class="ico">⚙️</span> Settings</a>
+  <div class="nav-bottom">
+    <div class="nav-shop-card">
+      <div class="nav-shop-name">VMR Madhuram</div>
+      <div class="nav-shop-addr">Thoravalur, Erode Dist.</div>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+<!-- ===== DASHBOARD ===== -->
+<div id="dashboard" class="page active">
+  <div class="page-header">
+    <div>
+      <div class="page-title">Dashboard</div>
+      <div class="page-sub">Overview for Tuesday, 05 May 2026</div>
+    </div>
+    <div class="page-actions">
+      <button class="btn btn-primary btn-sm">📄 Daily Report</button>
+      <button class="btn btn-gold btn-sm">+ Quick Sale</button>
+    </div>
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-icon">💰</div>
+      <div class="kpi-label">Today's Sales</div>
+      <div class="kpi-val">₹8,450</div>
+      <div class="kpi-trend">↑ 12% vs yesterday</div>
+    </div>
+    <div class="kpi-card g">
+      <div class="kpi-icon">🔧</div>
+      <div class="kpi-label">Pending Repairs</div>
+      <div class="kpi-val">7</div>
+      <div class="kpi-trend">3 ready for pickup</div>
+    </div>
+    <div class="kpi-card r">
+      <div class="kpi-icon">⚠️</div>
+      <div class="kpi-label">Low Stock Items</div>
+      <div class="kpi-val">4</div>
+      <div class="kpi-trend dn">↓ Action needed</div>
+    </div>
+    <div class="kpi-card p">
+      <div class="kpi-icon">📈</div>
+      <div class="kpi-label">Monthly Revenue</div>
+      <div class="kpi-val">₹1.24L</div>
+      <div class="kpi-trend">↑ 8% vs last month</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Weekly Sales Trend <span class="badge badge-blue">This Week</span></div>
+      <div class="bar-chart">
+        <div class="bar-group"><div class="bar-stack"><div class="bar" style="height:60px;background:#2563EB;"></div><div class="bar mid" style="height:20px;background:#16A34A;"></div><div class="bar bot" style="height:10px;background:#7C3AED;"></div></div><div class="bar-lbl">MON</div></div>
+        <div class="bar-group"><div class="bar-stack"><div class="bar" style="height:88px;background:#2563EB;"></div><div class="bar mid" style="height:24px;background:#16A34A;"></div><div class="bar bot" style="height:8px;background:#7C3AED;"></div></div><div class="bar-lbl">TUE</div></div>
+        <div class="bar-group"><div class="bar-stack"><div class="bar" style="height:50px;background:#2563EB;"></div><div class="bar mid" style="height:30px;background:#16A34A;"></div><div class="bar bot" style="height:12px;background:#7C3AED;"></div></div><div class="bar-lbl">WED</div></div>
+        <div class="bar-group"><div class="bar-stack"><div class="bar" style="height:100px;background:#2563EB;"></div><div class="bar mid" style="height:14px;background:#16A34A;"></div><div class="bar bot" style="height:10px;background:#7C3AED;"></div></div><div class="bar-lbl">THU</div></div>
+        <div class="bar-group"><div class="bar-stack"><div class="bar" style="height:74px;background:#2563EB;"></div><div class="bar mid" style="height:34px;background:#16A34A;"></div><div class="bar bot" style="height:14px;background:#7C3AED;"></div></div><div class="bar-lbl">FRI</div></div>
+        <div class="bar-group"><div class="bar-stack"><div class="bar" style="height:115px;background:#2563EB;"></div><div class="bar mid" style="height:18px;background:#16A34A;"></div><div class="bar bot" style="height:5px;background:#7C3AED;"></div></div><div class="bar-lbl">SAT</div></div>
+        <div class="bar-group"><div class="bar-stack"><div class="bar" style="height:44px;background:#2563EB;"></div><div class="bar mid" style="height:17px;background:#16A34A;"></div><div class="bar bot" style="height:6px;background:#7C3AED;"></div></div><div class="bar-lbl">SUN</div></div>
+      </div>
+      <div class="legend">
+        <div class="leg-item"><div class="leg-dot" style="background:#2563EB;"></div> Mobile Sales</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#16A34A;"></div> Repairs</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#7C3AED;"></div> Jio Services</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Revenue Breakdown</div>
+      <div class="donut-wrap">
+        <div class="donut"></div>
+        <div class="donut-leg">
+          <div class="d-item"><div class="d-dot" style="background:#2563EB;"></div><div class="d-name">Mobile Sales</div><div class="d-pct">50%</div></div>
+          <div class="d-item"><div class="d-dot" style="background:#16A34A;"></div><div class="d-name">Repair Service</div><div class="d-pct">20%</div></div>
+          <div class="d-item"><div class="d-dot" style="background:#F4A300;"></div><div class="d-name">Spare Parts</div><div class="d-pct">15%</div></div>
+          <div class="d-item"><div class="d-dot" style="background:#7C3AED;"></div><div class="d-name">Jio Services</div><div class="d-pct">15%</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="two-col-eq">
+    <div class="card">
+      <div class="card-title">Active Repair Jobs <span class="badge badge-blue">7 Open</span></div>
+      <div class="job-list">
+        <div class="job-item"><div class="j-avatar">RK</div><div class="j-info"><div class="j-name">Ravi Kumar</div><div class="j-dev">Samsung A14 — Screen Damage</div></div><span class="s-badge s-ready">Ready ✓</span></div>
+        <div class="job-item"><div class="j-avatar">MP</div><div class="j-info"><div class="j-name">Murugan P.</div><div class="j-dev">Vivo Y16 — Battery Replace</div></div><span class="s-badge s-prog">In Progress</span></div>
+        <div class="job-item"><div class="j-avatar">SL</div><div class="j-info"><div class="j-name">Selvi L.</div><div class="j-dev">Realme C55 — Charging Issue</div></div><span class="s-badge s-recv">Received</span></div>
+        <div class="job-item"><div class="j-avatar">KT</div><div class="j-info"><div class="j-name">Karthi T.</div><div class="j-dev">Redmi 12C — Speaker Problem</div></div><span class="s-badge s-prog">In Progress</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Inventory Alerts <span class="badge badge-red">4 Alerts</span></div>
+      <div class="alert-list">
+        <div class="alert-item"><div><div class="a-name">Samsung A15 (Black)</div><div class="a-qty">Stock: 0 | Min: 2</div></div><span class="a-badge">OUT</span></div>
+        <div class="alert-item warn"><div><div class="a-name">Vivo Y200 Tempered Glass</div><div class="a-qty">Stock: 3 | Min: 10</div></div><span class="a-badge warn">LOW</span></div>
+        <div class="alert-item warn"><div><div class="a-name">Type-C Charging Cable</div><div class="a-qty">Stock: 5 | Min: 15</div></div><span class="a-badge warn">LOW</span></div>
+        <div class="alert-item"><div><div class="a-name">Realme C67 Back Cover</div><div class="a-qty">Stock: 0 | Min: 5</div></div><span class="a-badge">OUT</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Jio Services — May 2026</div>
+    <div class="jio-grid">
+      <div class="jio-card"><div class="jio-lbl">MNP Activations</div><div class="jio-num">14</div><div class="jio-comm">Est. Commission: ₹2,100</div></div>
+      <div class="jio-card"><div class="jio-lbl">AirFiber Connections</div><div class="jio-num">6</div><div class="jio-comm">Est. Commission: ₹3,600</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Recent Transactions <span class="badge badge-blue">Last 10</span></div>
+    <table>
+      <thead><tr><th>Date</th><th>Customer</th><th>Item / Service</th><th>Category</th><th>Amount</th><th>Payment</th></tr></thead>
+      <tbody>
+        <tr><td>05 May</td><td>Arun S.</td><td>Vivo Y200 (6GB/128GB)</td><td>Mobile Sale</td><td class="amt">₹16,999</td><td><span class="pay-u">UPI</span></td></tr>
+        <tr><td>05 May</td><td>Kavitha M.</td><td>Screen Replace — Redmi 12</td><td>Repair</td><td class="amt">₹850</td><td><span class="pay-c">Cash</span></td></tr>
+        <tr><td>05 May</td><td>Bala R.</td><td>Samsung A15 Tempered Glass</td><td>Spare Parts</td><td class="amt">₹120</td><td><span class="pay-c">Cash</span></td></tr>
+        <tr><td>04 May</td><td>Priya N.</td><td>Jio MNP — Airtel to Jio</td><td>Jio Service</td><td class="amt">₹299</td><td><span class="pay-u">UPI</span></td></tr>
+        <tr><td>04 May</td><td>Senthil K.</td><td>Nokia 105 Feature Phone</td><td>Mobile Sale</td><td class="amt">₹1,499</td><td><span class="pay-c">Cash</span></td></tr>
+        <tr><td>04 May</td><td>Devi R.</td><td>Battery Replace — Oppo A57</td><td>Repair</td><td class="amt">₹650</td><td><span class="pay-c">Cash</span></td></tr>
+        <tr><td>03 May</td><td>Ramesh T.</td><td>Jio AirFiber — New Connection</td><td>Jio Service</td><td class="amt">₹2,999</td><td><span class="pay-u">UPI</span></td></tr>
+        <tr><td>03 May</td><td>Anbu V.</td><td>Earbuds — Target Brand</td><td>Accessory</td><td class="amt">₹499</td><td><span class="pay-c">Cash</span></td></tr>
+        <tr><td>03 May</td><td>Meena P.</td><td>Realme C55 (4GB/64GB)</td><td>Mobile Sale</td><td class="amt">₹10,499</td><td><span class="pay-u">UPI</span></td></tr>
+        <tr><td>02 May</td><td>Suresh D.</td><td>Charging Port Fix — Lava Agni 2</td><td>Repair</td><td class="amt">₹450</td><td><span class="pay-c">Cash</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ===== INVENTORY ===== -->
+<div id="inventory" class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title">Inventory</div>
+      <div class="page-sub">Manage stock — mobiles, accessories, and spare parts</div>
+    </div>
+    <button class="btn btn-gold btn-sm">+ Add Stock</button>
+  </div>
+
+  <div class="sum-row">
+    <div class="sum-box"><div class="sum-val">142</div><div class="sum-lbl">Total SKUs</div></div>
+    <div class="sum-box"><div class="sum-val" style="color:var(--red);">4</div><div class="sum-lbl">Out of Stock</div></div>
+    <div class="sum-box"><div class="sum-val" style="color:#D97706;">8</div><div class="sum-lbl">Low Stock</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Add New Stock Item</div>
+    <div class="form-grid">
+      <div class="form-group"><label>Category</label><select><option>Mobile Phone</option><option>Accessory</option><option>Spare Part</option><option>Charger / Cable</option></select></div>
+      <div class="form-group"><label>Brand</label><select><option>Vivo</option><option>Samsung</option><option>Realme</option><option>Oppo</option><option>Redmi / Mi</option><option>Nokia</option><option>Lava</option><option>Apple</option></select></div>
+      <div class="form-group"><label>Model Name</label><input type="text" placeholder="e.g. Vivo Y200 6GB/128GB Gold"/></div>
+      <div class="form-group"><label>Color / Variant</label><input type="text" placeholder="e.g. Midnight Blue"/></div>
+      <div class="form-group"><label>Purchase Price (₹)</label><input type="number" placeholder="e.g. 14500"/></div>
+      <div class="form-group"><label>Selling Price (₹)</label><input type="number" placeholder="e.g. 16999"/></div>
+      <div class="form-group"><label>Quantity Added</label><input type="number" placeholder="e.g. 5"/></div>
+      <div class="form-group"><label>Minimum Stock Alert</label><input type="number" placeholder="e.g. 2"/></div>
+    </div>
+    <div class="btn-row"><button class="btn btn-primary">Add to Stock</button><button class="btn btn-gold">Clear Form</button></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Current Stock</div>
+    <div class="search-bar">
+      <input type="text" placeholder="🔍  Search by brand or model..."/>
+      <select><option>All Categories</option><option>Mobile Phone</option><option>Accessory</option><option>Spare Part</option></select>
+      <select><option>All Brands</option><option>Vivo</option><option>Samsung</option><option>Realme</option><option>Nokia</option></select>
+    </div>
+    <table>
+      <thead><tr><th>Brand</th><th>Model</th><th>Color</th><th>Buy ₹</th><th>Sell ₹</th><th>Stock</th><th>Min</th><th>Status</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td>Vivo</td><td>Y200 6GB/128GB</td><td>Midnight Blue</td><td class="amt">₹14,200</td><td class="amt">₹16,999</td><td>8</td><td>2</td><td><span class="pill pill-ok">OK</span></td><td><button class="btn btn-primary btn-sm">Edit</button></td></tr>
+        <tr><td>Samsung</td><td>Galaxy A15 128GB</td><td>Black</td><td class="amt">₹12,500</td><td class="amt">₹14,999</td><td>0</td><td>2</td><td><span class="pill pill-out">OUT</span></td><td><button class="btn btn-gold btn-sm">Reorder</button></td></tr>
+        <tr><td>Realme</td><td>C55 4GB/64GB</td><td>Rainy Night</td><td class="amt">₹8,800</td><td class="amt">₹10,499</td><td>5</td><td>2</td><td><span class="pill pill-ok">OK</span></td><td><button class="btn btn-primary btn-sm">Edit</button></td></tr>
+        <tr><td>Nokia</td><td>105 DS</td><td>Blue</td><td class="amt">₹1,100</td><td class="amt">₹1,499</td><td>12</td><td>5</td><td><span class="pill pill-ok">OK</span></td><td><button class="btn btn-primary btn-sm">Edit</button></td></tr>
+        <tr><td>Redmi</td><td>12C 4GB/64GB</td><td>Lavender Purple</td><td class="amt">₹7,200</td><td class="amt">₹8,999</td><td>3</td><td>3</td><td><span class="pill pill-low">LOW</span></td><td><button class="btn btn-gold btn-sm">Reorder</button></td></tr>
+        <tr><td>Oppo</td><td>A57 4GB/64GB</td><td>Glowing Black</td><td class="amt">₹10,500</td><td class="amt">₹12,499</td><td>4</td><td>2</td><td><span class="pill pill-ok">OK</span></td><td><button class="btn btn-primary btn-sm">Edit</button></td></tr>
+        <tr><td>Accessories</td><td>Vivo Y200 Tempered Glass</td><td>—</td><td class="amt">₹60</td><td class="amt">₹120</td><td>3</td><td>10</td><td><span class="pill pill-low">LOW</span></td><td><button class="btn btn-gold btn-sm">Reorder</button></td></tr>
+        <tr><td>Accessories</td><td>Type-C Charging Cable 2m</td><td>Black</td><td class="amt">₹80</td><td class="amt">₹150</td><td>5</td><td>15</td><td><span class="pill pill-low">LOW</span></td><td><button class="btn btn-gold btn-sm">Reorder</button></td></tr>
+        <tr><td>Spare Part</td><td>Realme C67 Back Cover</td><td>Black</td><td class="amt">₹180</td><td class="amt">₹350</td><td>0</td><td>5</td><td><span class="pill pill-out">OUT</span></td><td><button class="btn btn-gold btn-sm">Reorder</button></td></tr>
+        <tr><td>Accessories</td><td>Target Earbuds TWS</td><td>White</td><td class="amt">₹280</td><td class="amt">₹499</td><td>14</td><td>5</td><td><span class="pill pill-ok">OK</span></td><td><button class="btn btn-primary btn-sm">Edit</button></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ===== SALES ===== -->
+<div id="sales" class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title">Sales</div>
+      <div class="page-sub">Record new sales and view transaction history</div>
+    </div>
+    <button class="btn btn-gold btn-sm">🖨️ Print Receipt</button>
+  </div>
+
+  <div class="sum-row">
+    <div class="sum-box"><div class="sum-val">₹8,450</div><div class="sum-lbl">Today's Revenue</div></div>
+    <div class="sum-box"><div class="sum-val">12</div><div class="sum-lbl">Transactions Today</div></div>
+    <div class="sum-box"><div class="sum-val">₹1.24L</div><div class="sum-lbl">This Month Total</div></div>
+  </div>
+
+  <div class="two-col-eq">
+    <div class="card">
+      <div class="card-title">New Sale</div>
+      <div class="form-group" style="margin-bottom:12px;"><label>Search Product</label><input type="text" placeholder="🔍  Type brand or model name..."/></div>
+      <div class="cart-box">
+        <div class="cart-head">Cart Items</div>
+        <div class="cart-row"><div><div class="cart-item-name">Vivo Y200 6GB/128GB</div><div class="cart-item-sub">Midnight Blue × 1</div></div><div class="amt">₹16,999</div></div>
+        <div class="cart-row"><div><div class="cart-item-name">Target TWS Earbuds</div><div class="cart-item-sub">White × 1</div></div><div class="amt">₹499</div></div>
+        <div class="cart-total"><span>Total</span><span class="amt" style="font-size:16px;">₹17,498</span></div>
+      </div>
+      <div class="form-grid">
+        <div class="form-group"><label>Customer Name</label><input type="text" placeholder="e.g. Arun S."/></div>
+        <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="e.g. 98765 43210"/></div>
+        <div class="form-group"><label>Discount (₹)</label><input type="number" placeholder="0"/></div>
+        <div class="form-group"><label>Payment Mode</label><select><option>Cash</option><option>UPI</option><option>Card</option></select></div>
+      </div>
+      <div class="btn-row"><button class="btn btn-primary">Generate Bill</button><button class="btn btn-gold">Print Receipt</button><button class="btn btn-red">Clear Cart</button></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Today's Breakdown</div>
+      <div class="rep-bar-wrap"><div class="rep-bar-label"><span>Mobile Sales (7)</span><span style="font-weight:700;font-family:'Space Mono',monospace;">₹6,200</span></div><div class="rep-bar-track"><div class="rep-bar-fill" style="width:73%;background:#2563EB;"></div></div></div>
+      <div class="rep-bar-wrap"><div class="rep-bar-label"><span>Repairs (3)</span><span style="font-weight:700;font-family:'Space Mono',monospace;">₹1,500</span></div><div class="rep-bar-track"><div class="rep-bar-fill" style="width:18%;background:#16A34A;"></div></div></div>
+      <div class="rep-bar-wrap"><div class="rep-bar-label"><span>Spare Parts (2)</span><span style="font-weight:700;font-family:'Space Mono',monospace;">₹270</span></div><div class="rep-bar-track"><div class="rep-bar-fill" style="width:3%;background:#F4A300;"></div></div></div>
+      <div class="rep-bar-wrap"><div class="rep-bar-label"><span>Jio Services (1)</span><span style="font-weight:700;font-family:'Space Mono',monospace;">₹480</span></div><div class="rep-bar-track"><div class="rep-bar-fill" style="width:6%;background:#7C3AED;"></div></div></div>
+      <div class="today-collect">
+        <div class="today-collect-lbl">Total Collected Today</div>
+        <div class="today-collect-amt">₹8,450</div>
+        <div class="today-collect-sub">Cash: ₹5,200 &nbsp;·&nbsp; UPI: ₹3,250</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Sales History</div>
+    <div class="search-bar">
+      <input type="text" placeholder="🔍  Search by customer or item..."/>
+      <select><option>All Categories</option><option>Mobile Sale</option><option>Repair</option><option>Spare Parts</option><option>Jio Service</option></select>
+      <select><option>All Payment</option><option>Cash</option><option>UPI</option><option>Card</option></select>
+    </div>
+    <table>
+      <thead><tr><th>Date</th><th>Bill No.</th><th>Customer</th><th>Item / Service</th><th>Amount</th><th>Payment</th></tr></thead>
+      <tbody>
+        <tr><td>05 May</td><td>#1042</td><td>Arun S.</td><td>Vivo Y200 (6GB/128GB)</td><td class="amt">₹16,999</td><td><span class="pay-u">UPI</span></td></tr>
+        <tr><td>05 May</td><td>#1041</td><td>Kavitha M.</td><td>Screen Replace — Redmi 12</td><td class="amt">₹850</td><td><span class="pay-c">Cash</span></td></tr>
+        <tr><td>05 May</td><td>#1040</td><td>Bala R.</td><td>Samsung A15 Tempered Glass</td><td class="amt">₹120</td><td><span class="pay-c">Cash</span></td></tr>
+        <tr><td>04 May</td><td>#1039</td><td>Priya N.</td><td>Jio MNP — Airtel to Jio</td><td class="amt">₹299</td><td><span class="pay-u">UPI</span></td></tr>
+        <tr><td>04 May</td><td>#1038</td><td>Senthil K.</td><td>Nokia 105 Feature Phone</td><td class="amt">₹1,499</td><td><span class="pay-c">Cash</span></td></tr>
+        <tr><td>04 May</td><td>#1037</td><td>Devi R.</td><td>Battery Replace — Oppo A57</td><td class="amt">₹650</td><td><span class="pay-c">Cash</span></td></tr>
+        <tr><td>03 May</td><td>#1036</td><td>Ramesh T.</td><td>Jio AirFiber — New Connection</td><td class="amt">₹2,999</td><td><span class="pay-u">UPI</span></td></tr>
+        <tr><td>03 May</td><td>#1035</td><td>Anbu V.</td><td>Earbuds — Target Brand</td><td class="amt">₹499</td><td><span class="pay-c">Cash</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ===== REPAIRS ===== -->
+<div id="repairs" class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title">Repair Jobs</div>
+      <div class="page-sub">Track and manage all service and repair job cards</div>
+    </div>
+    <button class="btn btn-gold btn-sm">+ New Job Card</button>
+  </div>
+
+  <div class="sum-row">
+    <div class="sum-box"><div class="sum-val" style="color:#92400E;">3</div><div class="sum-lbl">Received Today</div></div>
+    <div class="sum-box"><div class="sum-val" style="color:#1E40AF;">4</div><div class="sum-lbl">In Progress</div></div>
+    <div class="sum-box"><div class="sum-val" style="color:#065F46;">3</div><div class="sum-lbl">Ready for Pickup</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">New Repair Job Card</div>
+    <div class="form-grid">
+      <div class="form-group"><label>Customer Name</label><input type="text" placeholder="e.g. Ravi Kumar"/></div>
+      <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="e.g. 98765 43210"/></div>
+      <div class="form-group"><label>Device Brand</label><select><option>Samsung</option><option>Vivo</option><option>Realme</option><option>Oppo</option><option>Redmi</option><option>Nokia</option><option>Apple</option><option>Lava</option><option>Other</option></select></div>
+      <div class="form-group"><label>Device Model</label><input type="text" placeholder="e.g. Galaxy A14"/></div>
+      <div class="form-group"><label>Problem Description</label><input type="text" placeholder="e.g. Screen cracked, touch not working"/></div>
+      <div class="form-group"><label>Assign Technician</label><select><option>Kumar (Senior)</option><option>Raj (Junior)</option><option>Self</option></select></div>
+      <div class="form-group"><label>Estimated Cost (₹)</label><input type="number" placeholder="e.g. 850"/></div>
+      <div class="form-group"><label>Expected Delivery</label><input type="date"/></div>
+    </div>
+    <div class="form-group" style="margin-top:12px;"><label>Additional Notes</label><textarea placeholder="Special instructions, parts needed, warranty info..."></textarea></div>
+    <div class="btn-row"><button class="btn btn-primary">Create Job Card</button><button class="btn btn-gold">Print Job Slip</button></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Repair Board</div>
+    <div class="kanban">
+      <div class="k-col">
+        <div class="k-head recv">📥 Received (3)</div>
+        <div class="k-card"><div class="k-card-name">Selvi L.</div><div class="k-card-dev">Realme C55</div><div class="k-card-dev" style="color:#92400E;">Charging Issue</div><div class="k-card-date">05 May 2026</div><div class="k-card-cost">Est: ₹600</div></div>
+        <div class="k-card"><div class="k-card-name">Anand P.</div><div class="k-card-dev">Lava Agni 2</div><div class="k-card-dev" style="color:#92400E;">Camera Not Working</div><div class="k-card-date">04 May 2026</div><div class="k-card-cost">Est: ₹1,200</div></div>
+        <div class="k-card"><div class="k-card-name">Geetha S.</div><div class="k-card-dev">Nokia 5.3</div><div class="k-card-dev" style="color:#92400E;">Mic Problem</div><div class="k-card-date">05 May 2026</div><div class="k-card-cost">Est: ₹450</div></div>
+      </div>
+      <div class="k-col">
+        <div class="k-head prog">🔧 In Progress (4)</div>
+        <div class="k-card"><div class="k-card-name">Murugan P.</div><div class="k-card-dev">Vivo Y16</div><div class="k-card-dev" style="color:#1E40AF;">Battery Replace</div><div class="k-card-date">Since: 03 May</div><div class="k-card-cost">₹750</div></div>
+        <div class="k-card"><div class="k-card-name">Karthi T.</div><div class="k-card-dev">Redmi 12C</div><div class="k-card-dev" style="color:#1E40AF;">Speaker Problem</div><div class="k-card-date">Since: 04 May</div><div class="k-card-cost">₹500</div></div>
+        <div class="k-card"><div class="k-card-name">Nisha R.</div><div class="k-card-dev">Oppo A57</div><div class="k-card-dev" style="color:#1E40AF;">Display Replace</div><div class="k-card-date">Since: 02 May</div><div class="k-card-cost">₹2,100</div></div>
+        <div class="k-card"><div class="k-card-name">Vijay M.</div><div class="k-card-dev">Samsung A32</div><div class="k-card-dev" style="color:#1E40AF;">Back Glass Crack</div><div class="k-card-date">Since: 04 May</div><div class="k-card-cost">₹850</div></div>
+      </div>
+      <div class="k-col">
+        <div class="k-head ready">✅ Ready (3)</div>
+        <div class="k-card"><div class="k-card-name">Ravi Kumar</div><div class="k-card-dev">Samsung A14</div><div class="k-card-dev" style="color:#065F46;">Screen Replace ✓</div><div class="k-card-date">Ready: 05 May</div><div class="k-card-cost">₹1,350</div></div>
+        <div class="k-card"><div class="k-card-name">Suresh D.</div><div class="k-card-dev">Lava Agni 2</div><div class="k-card-dev" style="color:#065F46;">Charging Port ✓</div><div class="k-card-date">Ready: 04 May</div><div class="k-card-cost">₹450</div></div>
+        <div class="k-card"><div class="k-card-name">Ponni K.</div><div class="k-card-dev">Vivo V25</div><div class="k-card-dev" style="color:#065F46;">Software Fix ✓</div><div class="k-card-date">Ready: 05 May</div><div class="k-card-cost">₹300</div></div>
+      </div>
+      <div class="k-col">
+        <div class="k-head done">🏁 Delivered (8)</div>
+        <div class="k-card"><div class="k-card-name">Ramya S.</div><div class="k-card-dev">Realme 10 Pro</div><div class="k-card-dev" style="color:#475569;">Battery ✓</div><div class="k-card-date">Delivered: 04 May</div><div class="k-card-cost">₹700</div></div>
+        <div class="k-card"><div class="k-card-name">Kumar A.</div><div class="k-card-dev">Redmi Note 11</div><div class="k-card-dev" style="color:#475569;">Screen ✓</div><div class="k-card-date">Delivered: 03 May</div><div class="k-card-cost">₹1,100</div></div>
+        <div class="k-card"><div class="k-card-name">Deepa M.</div><div class="k-card-dev">Samsung M34</div><div class="k-card-dev" style="color:#475569;">Touch Fix ✓</div><div class="k-card-date">Delivered: 02 May</div><div class="k-card-cost">₹950</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CUSTOMERS ===== -->
+<div id="customers" class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title">Customers</div>
+      <div class="page-sub">Customer directory and purchase / repair history</div>
+    </div>
+    <button class="btn btn-gold btn-sm">+ Add Customer</button>
+  </div>
+
+  <div class="sum-row">
+    <div class="sum-box"><div class="sum-val">318</div><div class="sum-lbl">Total Customers</div></div>
+    <div class="sum-box"><div class="sum-val">24</div><div class="sum-lbl">New This Month</div></div>
+    <div class="sum-box"><div class="sum-val">87</div><div class="sum-lbl">Repeat Customers</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Add New Customer</div>
+    <div class="form-grid">
+      <div class="form-group"><label>Full Name</label><input type="text" placeholder="e.g. Ravi Kumar"/></div>
+      <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="e.g. 98765 43210"/></div>
+      <div class="form-group"><label>Village / Area</label><input type="text" placeholder="e.g. Thoravalur"/></div>
+      <div class="form-group"><label>Customer Type</label><select><option>Regular</option><option>Repeat / VIP</option><option>Wholesale</option></select></div>
+    </div>
+    <div class="btn-row"><button class="btn btn-primary">Save Customer</button><button class="btn btn-gold">Clear</button></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Customer Directory</div>
+    <div class="search-bar">
+      <input type="text" placeholder="🔍  Search by name or phone number..."/>
+      <select><option>All Types</option><option>Regular</option><option>Repeat / VIP</option></select>
+    </div>
+    <table>
+      <thead><tr><th>Name</th><th>Phone</th><th>Area</th><th>Total Purchases</th><th>Last Visit</th><th>Type</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td>Ravi Kumar</td><td>98765 43210</td><td>Thoravalur</td><td class="amt">₹18,349</td><td>05 May 2026</td><td><span class="pill pill-rep">Repeat</span></td><td><button class="btn btn-primary btn-sm">View</button></td></tr>
+        <tr><td>Kavitha M.</td><td>97654 32109</td><td>Erode</td><td class="amt">₹850</td><td>05 May 2026</td><td><span class="pill pill-reg">Regular</span></td><td><button class="btn btn-primary btn-sm">View</button></td></tr>
+        <tr><td>Murugan P.</td><td>96543 21098</td><td>Thoravalur</td><td class="amt">₹3,200</td><td>03 May 2026</td><td><span class="pill pill-rep">Repeat</span></td><td><button class="btn btn-primary btn-sm">View</button></td></tr>
+        <tr><td>Selvi L.</td><td>95432 10987</td><td>Gobichettipalayam</td><td class="amt">₹600</td><td>05 May 2026</td><td><span class="pill pill-reg">Regular</span></td><td><button class="btn btn-primary btn-sm">View</button></td></tr>
+        <tr><td>Senthil K.</td><td>94321 09876</td><td>Thoravalur</td><td class="amt">₹7,498</td><td>04 May 2026</td><td><span class="pill pill-rep">Repeat</span></td><td><button class="btn btn-primary btn-sm">View</button></td></tr>
+        <tr><td>Priya N.</td><td>93210 98765</td><td>Bhavani</td><td class="amt">₹299</td><td>04 May 2026</td><td><span class="pill pill-reg">Regular</span></td><td><button class="btn btn-primary btn-sm">View</button></td></tr>
+        <tr><td>Ramesh T.</td><td>92109 87654</td><td>Thoravalur</td><td class="amt">₹14,498</td><td>03 May 2026</td><td><span class="pill pill-rep">Repeat</span></td><td><button class="btn btn-primary btn-sm">View</button></td></tr>
+        <tr><td>Anbu V.</td><td>91098 76543</td><td>Sathyamangalam</td><td class="amt">₹499</td><td>03 May 2026</td><td><span class="pill pill-reg">Regular</span></td><td><button class="btn btn-primary btn-sm">View</button></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ===== JIO SERVICES ===== -->
+<div id="jio" class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title">Jio Services</div>
+      <div class="page-sub">Track MNP activations and AirFiber connections — May 2026</div>
+    </div>
+  </div>
+
+  <div class="sum-row">
+    <div class="sum-box"><div class="sum-val" style="color:var(--purple);">14</div><div class="sum-lbl">MNP This Month</div></div>
+    <div class="sum-box"><div class="sum-val" style="color:var(--purple);">6</div><div class="sum-lbl">AirFiber This Month</div></div>
+    <div class="sum-box"><div class="sum-val" style="color:#065F46;">₹5,700</div><div class="sum-lbl">Est. Commission</div></div>
+  </div>
+
+  <div class="two-col-eq">
+    <div class="card">
+      <div class="card-title">Add MNP Activation</div>
+      <div class="form-group" style="margin-bottom:10px;"><label>Customer Name</label><input type="text" placeholder="e.g. Priya N."/></div>
+      <div class="form-group" style="margin-bottom:10px;"><label>Mobile Number (Porting)</label><input type="tel" placeholder="e.g. 94000 12345"/></div>
+      <div class="form-group" style="margin-bottom:10px;"><label>Current Operator (From)</label><select><option>Airtel</option><option>BSNL</option><option>Vi / Vodafone</option><option>Other</option></select></div>
+      <div class="form-group" style="margin-bottom:10px;"><label>Jio Plan Selected</label><select><option>₹179 — 28 Days</option><option>₹249 — 28 Days</option><option>₹299 — 28 Days</option><option>₹399 — 56 Days</option><option>₹2,999 — Annual</option></select></div>
+      <div class="form-group" style="margin-bottom:10px;"><label>Activation Date</label><input type="date"/></div>
+      <div class="btn-row"><button class="btn btn-primary">Save Activation</button></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Add AirFiber Connection</div>
+      <div class="form-group" style="margin-bottom:10px;"><label>Customer Name</label><input type="text" placeholder="e.g. Ramesh T."/></div>
+      <div class="form-group" style="margin-bottom:10px;"><label>Phone Number</label><input type="tel" placeholder="e.g. 92109 87654"/></div>
+      <div class="form-group" style="margin-bottom:10px;"><label>Address / Area</label><input type="text" placeholder="e.g. Near Bus Stop, Thoravalur"/></div>
+      <div class="form-group" style="margin-bottom:10px;"><label>Plan Selected</label><select><option>₹599/mo — 30 Mbps</option><option>₹999/mo — 100 Mbps</option><option>₹1,499/mo — 200 Mbps</option><option>₹2,999 — One Time Setup</option></select></div>
+      <div class="form-group" style="margin-bottom:10px;"><label>Installation Date</label><input type="date"/></div>
+      <div class="btn-row"><button class="btn btn-primary">Save Connection</button></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">MNP Activations — May 2026 <span class="badge badge-purple">14 Total · ₹2,100 Commission</span></div>
+    <table>
+      <thead><tr><th>Date</th><th>Customer</th><th>Number</th><th>From Operator</th><th>Plan</th><th>Commission</th></tr></thead>
+      <tbody>
+        <tr><td>05 May</td><td>Priya N.</td><td>94000 12345</td><td>Airtel</td><td>₹299 / 28D</td><td class="amt">₹150</td></tr>
+        <tr><td>04 May</td><td>Karthik R.</td><td>93000 23456</td><td>Vi</td><td>₹249 / 28D</td><td class="amt">₹150</td></tr>
+        <tr><td>04 May</td><td>Lakshmi S.</td><td>92000 34567</td><td>BSNL</td><td>₹399 / 56D</td><td class="amt">₹150</td></tr>
+        <tr><td>03 May</td><td>Babu M.</td><td>91000 45678</td><td>Airtel</td><td>₹299 / 28D</td><td class="amt">₹150</td></tr>
+        <tr><td>02 May</td><td>Vani K.</td><td>90000 56789</td><td>Vi</td><td>₹179 / 28D</td><td class="amt">₹150</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">AirFiber Connections — May 2026 <span class="badge badge-purple">6 Total · ₹3,600 Commission</span></div>
+    <table>
+      <thead><tr><th>Date</th><th>Customer</th><th>Area</th><th>Plan</th><th>Commission</th></tr></thead>
+      <tbody>
+        <tr><td>03 May</td><td>Ramesh T.</td><td>Thoravalur</td><td>₹999/mo — 100Mbps</td><td class="amt">₹600</td></tr>
+        <tr><td>02 May</td><td>Murugan V.</td><td>Near Bus Stop</td><td>₹599/mo — 30Mbps</td><td class="amt">₹600</td></tr>
+        <tr><td>01 May</td><td>Suganya R.</td><td>Thoravalur</td><td>₹1,499/mo — 200Mbps</td><td class="amt">₹600</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ===== REPORTS ===== -->
+<div id="reports" class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title">Reports</div>
+      <div class="page-sub">Business performance overview — May 2026</div>
+    </div>
+    <button class="btn btn-gold btn-sm">📄 Download PDF</button>
+  </div>
+
+  <div class="sum-row">
+    <div class="sum-box"><div class="sum-val">₹1,24,000</div><div class="sum-lbl">Total Revenue</div></div>
+    <div class="sum-box"><div class="sum-val" style="color:var(--green);">₹84,500</div><div class="sum-lbl">Est. Profit</div></div>
+    <div class="sum-box"><div class="sum-val">342</div><div class="sum-lbl">Transactions</div></div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Revenue by Category — May 2026</div>
+      <div class="rep-bar-wrap"><div class="rep-bar-label"><span>Mobile Sales</span><span style="font-family:'Space Mono',monospace;font-weight:700;">₹62,000 — 50%</span></div><div class="rep-bar-track"><div class="rep-bar-fill" style="width:100%;background:#2563EB;"></div></div></div>
+      <div class="rep-bar-wrap"><div class="rep-bar-label"><span>Repair Service</span><span style="font-family:'Space Mono',monospace;font-weight:700;">₹24,800 — 20%</span></div><div class="rep-bar-track"><div class="rep-bar-fill" style="width:40%;background:#16A34A;"></div></div></div>
+      <div class="rep-bar-wrap"><div class="rep-bar-label"><span>Spare Parts</span><span style="font-family:'Space Mono',monospace;font-weight:700;">₹18,600 — 15%</span></div><div class="rep-bar-track"><div class="rep-bar-fill" style="width:30%;background:#F4A300;"></div></div></div>
+      <div class="rep-bar-wrap"><div class="rep-bar-label"><span>Jio Services</span><span style="font-family:'Space Mono',monospace;font-weight:700;">₹18,600 — 15%</span></div><div class="rep-bar-track"><div class="rep-bar-fill" style="width:30%;background:#7C3AED;"></div></div></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Top Selling Models — May 2026</div>
+      <table>
+        <thead><tr><th>Model</th><th>Units</th><th>Revenue</th></tr></thead>
+        <tbody>
+          <tr><td>Vivo Y200</td><td>8</td><td class="amt">₹1,35,992</td></tr>
+          <tr><td>Realme C55</td><td>6</td><td class="amt">₹62,994</td></tr>
+          <tr><td>Redmi 12C</td><td>5</td><td class="amt">₹44,995</td></tr>
+          <tr><td>Samsung A15</td><td>4</td><td class="amt">₹59,996</td></tr>
+          <tr><td>Nokia 105</td><td>11</td><td class="amt">₹16,489</td></tr>
+          <tr><td>Oppo A57</td><td>3</td><td class="amt">₹37,497</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="two-col-eq">
+    <div class="card">
+      <div class="card-title">Month-over-Month Revenue</div>
+      <table>
+        <thead><tr><th>Month</th><th>Revenue</th><th>Growth</th></tr></thead>
+        <tbody>
+          <tr><td>May 2026</td><td class="amt">₹1,24,000</td><td style="color:var(--green);font-weight:700;font-family:'Space Mono',monospace;">↑ 8%</td></tr>
+          <tr><td>Apr 2026</td><td class="amt">₹1,14,800</td><td style="color:var(--green);font-weight:700;font-family:'Space Mono',monospace;">↑ 5%</td></tr>
+          <tr><td>Mar 2026</td><td class="amt">₹1,09,300</td><td style="color:var(--green);font-weight:700;font-family:'Space Mono',monospace;">↑ 3%</td></tr>
+          <tr><td>Feb 2026</td><td class="amt">₹1,06,100</td><td style="color:var(--red);font-weight:700;font-family:'Space Mono',monospace;">↓ 2%</td></tr>
+          <tr><td>Jan 2026</td><td class="amt">₹1,08,200</td><td style="color:var(--green);font-weight:700;font-family:'Space Mono',monospace;">↑ 11%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title">Repair Types — May 2026</div>
+      <div class="rep-bar-wrap"><div class="rep-bar-label"><span>Screen Replacements</span><span>18 jobs</span></div><div class="rep-bar-track"><div class="rep-bar-fill" style="width:72%;background:#2563EB;"></div></div></div>
+      <div class="rep-bar-wrap"><div class="rep-bar-label"><span>Battery Replacements</span><span>12 jobs</span></div><div class="rep-bar-track"><div class="rep-bar-fill" style="width:48%;background:#16A34A;"></div></div></div>
+      <div class="rep-bar-wrap"><div class="rep-bar-label"><span>Charging Port Fix</span><span>8 jobs</span></div><div class="rep-bar-track"><div class="rep-bar-fill" style="width:32%;background:#F4A300;"></div></div></div>
+      <div class="rep-bar-wrap"><div class="rep-bar-label"><span>Software / Flash</span><span>5 jobs</span></div><div class="rep-bar-track"><div class="rep-bar-fill" style="width:20%;background:#7C3AED;"></div></div></div>
+      <div class="rep-bar-wrap"><div class="rep-bar-label"><span>Speaker / Mic</span><span>5 jobs</span></div><div class="rep-bar-track"><div class="rep-bar-fill" style="width:20%;background:#DC2626;"></div></div></div>
+      <div style="background:linear-gradient(135deg,#ECFDF5,#D1FAE5);border-radius:10px;padding:12px;text-align:center;margin-top:12px;border:1px solid #A7F3D0;">
+        <div style="font-size:10px;color:var(--green);font-weight:700;letter-spacing:1px;font-family:'Space Mono',monospace;">TOTAL REPAIR REVENUE</div>
+        <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#065F46;margin-top:4px;">₹24,800</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Export Reports</div>
+    <div class="btn-row">
+      <button class="btn btn-primary">📄 Download Monthly PDF</button>
+      <button class="btn btn-green">📊 Export to Excel (CSV)</button>
+      <button class="btn btn-gold">🖨️ Print Report</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SETTINGS ===== -->
+<div id="settings" class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title">Settings</div>
+      <div class="page-sub">Configure shop profile, users, and preferences</div>
+    </div>
+    <button class="btn btn-primary btn-sm">Save All Changes</button>
+  </div>
+
+  <div class="card">
+    <div class="setting-section">
+      <div class="setting-title">Shop Profile</div>
+      <div class="form-grid">
+        <div class="form-group"><label>Shop Name</label><input type="text" value="VMR Madhuram Mobile Care"/></div>
+        <div class="form-group"><label>Owner Name</label><input type="text" placeholder="Enter owner name"/></div>
+        <div class="form-group"><label>Primary Phone</label><input type="tel" value="97915 58255"/></div>
+        <div class="form-group"><label>WhatsApp Number</label><input type="tel" value="98654 28780"/></div>
+        <div class="form-group"><label>Address</label><input type="text" value="Bus Stop, Thoravalur"/></div>
+        <div class="form-group"><label>PIN Code</label><input type="text" value="638 103"/></div>
+        <div class="form-group"><label>GSTIN (if applicable)</label><input type="text" placeholder="e.g. 33XXXXX..."/></div>
+        <div class="form-group"><label>Language</label><select><option>English</option><option>தமிழ் (Tamil)</option></select></div>
+      </div>
+      <div class="btn-row"><button class="btn btn-primary">Save Profile</button></div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="setting-section">
+      <div class="setting-title">Notification Preferences</div>
+      <div class="toggle-row"><div><div class="toggle-info">Low Stock Alerts</div><div class="toggle-sub">Alert when item goes below minimum stock level</div></div><button class="toggle on" onclick="this.classList.toggle('on')"></button></div>
+      <div class="toggle-row"><div><div class="toggle-info">Repair Ready — WhatsApp Notify</div><div class="toggle-sub">Message customer when job is ready for pickup</div></div><button class="toggle on" onclick="this.classList.toggle('on')"></button></div>
+      <div class="toggle-row"><div><div class="toggle-info">Daily Sales Summary</div><div class="toggle-sub">End-of-day revenue summary notification</div></div><button class="toggle" onclick="this.classList.toggle('on')"></button></div>
+      <div class="toggle-row"><div><div class="toggle-info">Monthly Report Auto-Generate</div><div class="toggle-sub">Create report on 1st of each month</div></div><button class="toggle on" onclick="this.classList.toggle('on')"></button></div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="setting-section">
+      <div class="setting-title">User Management</div>
+      <div class="user-row"><div><div class="u-name">VMR (Owner)</div><div class="u-role">Full access to all modules</div></div><span class="role-chip role-owner">Owner</span></div>
+      <div class="user-row"><div><div class="u-name">Kumar</div><div class="u-role">Sales, Inventory, Repairs</div></div><span class="role-chip role-staff">Staff</span></div>
+      <div class="user-row"><div><div class="u-name">Raj</div><div class="u-role">Repair jobs only</div></div><span class="role-chip role-tech">Technician</span></div>
+      <div class="btn-row"><button class="btn btn-primary">+ Add New User</button></div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="setting-section">
+      <div class="setting-title">Data & Backup</div>
+      <div class="btn-row">
+        <button class="btn btn-primary">☁️ Backup Now</button>
+        <button class="btn btn-green">📥 Restore from Backup</button>
+        <button class="btn btn-red">🗑️ Clear All Data</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+</div>
+
+<script>
+function show(id, el) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  el.classList.add('active');
+}
+</script>
+</body>
+</html>
